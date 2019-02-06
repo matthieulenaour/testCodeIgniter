@@ -18,9 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
     <div id="objects" class="container">
-        <p>Objet: <input type="text" id=""></p>
-        <p>Catégorie: <input type="text" id=""></p>
-        <p>Date: <input type="text" id="datepicker"></p>
+        <form class="form-inline" action="<?php echo '/index.php/objects/index'; ?>" method="post">
+            <p>Objet: <input type="text" id="object_name" name="object_name"></p>
+            <p>Catégorie: <input type="text" id="object_category" name="object_category"></p>
+            <p>Date: <input type="text" id="object_date" name="object_date"></p>
+            <input class="btn btn-default" type="submit" value="Go">
+        </form>
+
+        <div>Nombre de Résultats: <?php echo $total_nb_objects; ?></div>
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -31,17 +36,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </tr>
             </thead>
             <tbody>
-            <?php foreach($objects as $object): ?>
-                <tr>
-                    <th scope="row"><?php echo $object->object_id; ?></th>
-                    <td><?php echo $object->name; ?></td>
-                    <td><?php echo $object->name_category; ?></td>
-                    <td><?php echo $object->created_at; ?></td>
-                </tr>
-            <?php endforeach; ?>
+            <?php if (!empty($objects)):?>
+                <?php foreach($objects as $object): ?>
+                    <tr>
+                        <th scope="row"><?php echo $object->object_id; ?></th>
+                        <td><?php echo $object->name; ?></td>
+                        <td><?php echo $object->name_category; ?></td>
+                        <td><?php echo $object->created_at; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else:?>
+                Aucun Résultats
+            <?php endif; ?>
             </tbody>
         </table>
-        <div class="pagination"><?php echo $pagination; ?></div>
+        <?php if (!empty($pagination)):?>
+            <div class="pagination"><?php echo $pagination; ?></div>
+        <?php endif; ?>
     </div>
 
 </body>
@@ -49,6 +60,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script>
     $( function() {
-        $( "#datepicker" ).datepicker();
+        $( "#object_date" ).datepicker({dateFormat: 'yy-mm-dd'});
     } );
 </script>
