@@ -24,9 +24,8 @@ class Objects_controller extends CI_Controller {
 
         $data = array();
 
-        //	On lance une requête
         $data['objects'] = $this->objectsManager->getAllObjects(10);
 
-        $this->load->view('welcome_message', $data);
+        $this->load->view('objects_view', $data);
     }
 }
