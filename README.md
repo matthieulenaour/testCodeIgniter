@@ -1,1 +1,1 @@
-# testCodeIgniter
+# test of PHP Framework CodeIgniter
