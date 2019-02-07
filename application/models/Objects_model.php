@@ -19,7 +19,7 @@ class Objects_model extends CI_Model
      * @param null $filter_object_name
      * @param null $filter_object_category
      * @param null $filter_object_date
-     * @return array
+     * @return array|bool
      */
     public function getObjects($nb, $begin = 0, $filter_object_name = null, $filter_object_category = null, $filter_object_date = null)
     {
@@ -58,6 +58,8 @@ class Objects_model extends CI_Model
 
             return [$data, $nbObjects];
         }
+
+        return false;
     }
 
 }

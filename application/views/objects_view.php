@@ -14,18 +14,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        body {
+            padding-top:50px;
+        }
+
+        h1 {
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        #nbResults {
+            padding-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
     <div id="objects" class="container">
-        <form class="form-inline" action="<?php echo '/index.php/objects/index'; ?>" method="post">
-            <p>Objet: <input type="text" id="object_name" name="object_name"></p>
-            <p>Catégorie: <input type="text" id="object_category" name="object_category"></p>
-            <p>Date: <input type="text" id="object_date" name="object_date"></p>
-            <input class="btn btn-default" type="submit" value="Go">
+        <h1>Liste des Objects</h1>
+        <form class="form-inline" action="<?php echo '/index.php/objects/index'; ?>" method="post" class="row">
+            <p class="col">Objet: <input type="text" id="object_name" name="object_name"></p>
+            <p class="col">Catégorie: <input type="text" id="object_category" name="object_category"></p>
+            <p class="col">Date: <input type="text" id="object_date" name="object_date"></p>
+            <input class="btn btn-default col" type="submit" value="Go">
         </form>
 
-        <div>Nombre de Résultats: <?php echo $total_nb_objects; ?></div>
+        <div id="nbResults">Nombre de Résultats: <?php echo $total_nb_objects; ?></div>
+        <?php if (!empty($pagination)):?>
+            <div class="pagination"><?php echo $pagination; ?></div>
+        <?php endif; ?>
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -50,9 +68,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php endif; ?>
             </tbody>
         </table>
-        <?php if (!empty($pagination)):?>
-            <div class="pagination"><?php echo $pagination; ?></div>
-        <?php endif; ?>
     </div>
 
 </body>
